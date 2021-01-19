@@ -66,6 +66,33 @@
   });
   L.control.layers(baseMaps,overlayMaps).addTo(myMap);
 
+  //Legend
+  var legend = L.control({
+    position: "bottomright"
+  });
+
+  
+  legend.onAdd = function() {
+    var div = L.DomUtil.create("div", "info legend");
+    var grades = [0, 2, 5, 7,"+"];
+    var colors = [
+      "#E0F2F7",
+      "#58ACFA",
+      "##0040FF",
+      "#0B2161"
+    ];
+
+    // Looping through
+    for (var i = 0; i < 4; i++) {
+      div.innerHTML +=
+        "<i style='background: " + colors[i] + "'></i> " +
+        grades[i] + (grades[i + 1] ? "&ndash;" + grades[i + 1] + "<br>" : "+");
+    }
+    return div;
+  };
+
+  // Finally, we our legend to the map.
+  legend.addTo(myMap);
 
   })
 
